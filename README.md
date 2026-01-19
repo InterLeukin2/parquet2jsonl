@@ -34,7 +34,7 @@ This tool converts Parquet files (.parquet) to JSONL format (JSON Lines), where 
 
 2. Create a virtual environment (recommended):
    ```bash
-   python -m venv venv
+   python3 -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
@@ -45,24 +45,33 @@ This tool converts Parquet files (.parquet) to JSONL format (JSON Lines), where 
 
 ## Usage
 
+### Preparing Your Data
+
+Place your Parquet files in the `input` directory:
+
+```bash
+# Copy your parquet file to the input directory
+cp /path/to/your/file.parquet input/
+```
+
 ### Command Line Interface
 
 ```bash
-python -m src.converter input.parquet
+python3 -m src.converter input/your_file.parquet
 ```
 
-This will create `input.jsonl` in the same directory.
+This will create `your_file.jsonl` in the current directory.
 
 To specify a custom output file:
 
 ```bash
-python -m src.converter input.parquet -o custom_output.jsonl
+python3 -m src.converter input/your_file.parquet -o output/custom_output.jsonl
 ```
 
 To process in batches for memory efficiency:
 
 ```bash
-python -m src.converter input.parquet --batch-size 10000
+python3 -m src.converter input/your_file.parquet --batch-size 10000
 ```
 
 ### Python API
@@ -70,7 +79,7 @@ python -m src.converter input.parquet --batch-size 10000
 ```python
 from src.converter import convert_parquet_to_jsonl
 
-convert_parquet_to_jsonl('input.parquet', 'output.jsonl')
+convert_parquet_to_jsonl('input/your_file.parquet', 'output/your_file.jsonl')
 ```
 
 ## Options
