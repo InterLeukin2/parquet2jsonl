@@ -29,7 +29,7 @@ This tool converts Parquet files (.parquet) to JSONL format (JSON Lines), where 
 1. Clone the repository:
    ```bash
    git clone <repository-url>
-   cd parquet-to-jsonl-converter
+   cd parquet2jsonl
    ```
 
 2. Create a virtual environment (recommended):
