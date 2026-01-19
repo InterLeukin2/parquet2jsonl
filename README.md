@@ -16,6 +16,8 @@ This tool converts Parquet files (.parquet) to JSONL format (JSON Lines), where 
 - Memory-efficient batch processing for large files
 - Command-line interface for easy automation
 - Support for all data types stored in Parquet files
+- Automatic input/output directory handling (place files in input/, get results in output/)
+- Batch conversion of all files in input directory
 
 ## Requirements
 
@@ -50,23 +52,32 @@ This tool converts Parquet files (.parquet) to JSONL format (JSON Lines), where 
 Place your Parquet files in the `input` directory:
 
 ```bash
-# Copy your parquet file to the input directory
-cp /path/to/your/file.parquet input/
+# Copy your parquet file(s) to the input directory
+cp /path/to/your/files/*.parquet input/
 ```
 
 ### Command Line Interface
 
+#### Convert all files in the input directory:
+```bash
+python3 -m src.converter input
+```
+
+Or simply run without arguments to convert all files:
+```bash
+python3 -m src.converter
+```
+
+Both commands will automatically find all .parquet files in the input directory and convert them to .jsonl files in the output directory, keeping the same filenames.
+
+#### Convert a single file:
 ```bash
 python3 -m src.converter input/your_file.parquet
 ```
 
-By default, this will create `your_file.jsonl` in the current directory. To output directly to the output directory:
+This will create `output/your_file.jsonl`.
 
-```bash
-python3 -m src.converter input/your_file.parquet -o output/your_file.jsonl
-```
-
-To specify a custom output file in the output directory:
+To specify a custom output file:
 
 ```bash
 python3 -m src.converter input/your_file.parquet -o output/custom_output.jsonl
@@ -88,8 +99,8 @@ convert_parquet_to_jsonl('input/your_file.parquet', 'output/your_file.jsonl')
 
 ## Options
 
-- `input`: Path to the input parquet file (required)
-- `-o, --output`: Path to the output JSONL file (default: input file with .jsonl extension)
+- `input`: Path to the input parquet file or 'input' directory to convert all files (default: 'input' directory)
+- `-o, --output`: Path to the output JSONL file (default: automatically maps input/ to output/ directory)
 - `--batch-size`: Process in batches to manage memory (default: load entire file)
 
 ## License
