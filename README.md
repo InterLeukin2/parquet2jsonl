@@ -60,9 +60,13 @@ cp /path/to/your/file.parquet input/
 python3 -m src.converter input/your_file.parquet
 ```
 
-This will create `your_file.jsonl` in the current directory.
+By default, this will create `your_file.jsonl` in the current directory. To output directly to the output directory:
 
-To specify a custom output file:
+```bash
+python3 -m src.converter input/your_file.parquet -o output/your_file.jsonl
+```
+
+To specify a custom output file in the output directory:
 
 ```bash
 python3 -m src.converter input/your_file.parquet -o output/custom_output.jsonl
